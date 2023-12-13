@@ -1,0 +1,396 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test API Sawgger",
+        "description": "Test de la documentation de l'API Swagger",
+        "contact": {
+            "name": "Testing API Team"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.swagger.fr/V1/",
+            "description": "API server"
+        }
+    ],
+    "paths": {
+        "/api/V1/apprenti": {
+            "get": {
+                "tags": [
+                    "Apprenti"
+                ],
+                "summary": "Avoir tous les apprentis",
+                "description": "Obtient tous les apprentis de l'école",
+                "operationId": "a3cba8d121b559fb8ddcd64ccf25f5c5",
+                "responses": {
+                    "200": {
+                        "description": "Les apprentis",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Apprenti"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Apprenti"
+                ],
+                "summary": "Ajouter un apprenti",
+                "description": "Ajouter un nouvel apprenti",
+                "operationId": "feb0476e9d4367037474ed2e36dc62ba",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Apprenti"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ajout d'un nouvel apprenti",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "L'apprenti a bien été ajouté"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Vous n'avez pas l'autorisation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Vous ne pouvez pas ajouter un nouvel apprenti"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/BadRequest"
+                    }
+                }
+            }
+        },
+        "/api/V1/apprenti/{id}": {
+            "get": {
+                "tags": [
+                    "Apprenti"
+                ],
+                "summary": "Avoir un apprenti",
+                "description": "Obtenir un apprenti avec son numéros d'id",
+                "operationId": "b86ec856b68bb58f953678f779757b89",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Numéros d'id de l'apprenti",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un Apprenti",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Apprenti"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Apprenti"
+                ],
+                "summary": "Supprimer un apprenti",
+                "description": "Supprime un apprenti",
+                "operationId": "29a1cb3fc0d2f91f67c88d9de2ae39cf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "L'apprenti a été supprimer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Vous n'êtes pas autorisé à faire cela"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "L'apprenti que vous souhaitez suprrimer n'existe pas"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Apprenti"
+                ],
+                "summary": "Modifier un apprenti",
+                "description": "Modifie un apprenti",
+                "operationId": "2ccf3978aa5c9f81aa958f8288c909b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Apprenti"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "L'apprenti a été modifié"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Vous n'êtes pas autorisé à faire cela"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "L'apprenti que vous souhaitez modifier n'existe pas"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Apprenti": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "type": "string"
+                    },
+                    "nomUsage": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "prenom": {
+                        "type": "string"
+                    },
+                    "sexe": {
+                        "type": "string"
+                    },
+                    "nationalite": {
+                        "type": "string"
+                    },
+                    "dateNaissance": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "departementNaissance": {
+                        "type": "string"
+                    },
+                    "communeNaissance": {
+                        "type": "string"
+                    },
+                    "nir": {
+                        "type": "string"
+                    },
+                    "regimeSocial": {
+                        "type": "integer"
+                    },
+                    "handicap": {
+                        "type": "boolean"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "NotFound": {
+                "description": "La ressource n'existe pas",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "L'apprenti que vous demandé n'existe pas"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "Unauthorized": {
+                "description": "Vous n'êtes pas autorisé à consulter cette ressource",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Vous n'avez pas l'autorisation"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "BadRequest": {
+                "description": "Mauvaise requête",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Mauvaise Requête"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
